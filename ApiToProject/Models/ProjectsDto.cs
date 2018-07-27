@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ApiToProject.Entities
+namespace ApiToProject.Models
 {
-    public class Projects
+    public class ProjectsDto
     {
         public Guid Id { get; set; }
         public string Title { get; set; }
@@ -15,7 +15,6 @@ namespace ApiToProject.Entities
         public DateTime endDate { get; set; }
 
         public Guid EmployeeId { get; set; }
-        public ICollection<Employee> Employees { get; set; }
-        = new List<Employee>();
+       
     }
 }

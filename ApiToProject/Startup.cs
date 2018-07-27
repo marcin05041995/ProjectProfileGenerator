@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using ApiToProject.Models;
+using ApiToProject.Entities;
 
 namespace ApiToProject
 {

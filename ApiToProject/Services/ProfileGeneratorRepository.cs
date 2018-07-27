@@ -32,6 +32,12 @@ namespace ApiToProject.Services
         }
 
         //public Employee GetEmployee(Guid employeeId){ }
-        //public IEnumerable<Employee> GetEmployees() { }
+        public IEnumerable<Employee> GetEmployees()
+        {
+            return _context.Employees
+                .OrderBy(a => a.FirstName)
+                .ThenBy(a => a.LastName)
+                .ToList();
+        }
     }
 }

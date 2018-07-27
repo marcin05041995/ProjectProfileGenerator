@@ -8,7 +8,7 @@ namespace ApiToProject.Services
 {
     public interface IProfileGeneratorRepository
     {
-        //IEnumerable<Author> GetAuthors();
+        IEnumerable<Employee> GetEmployees();
         //Author GetAuthor(Guid authorId);
         void AddEmployee(Employee employee);
         void DeleteEmployee(Employee employee);

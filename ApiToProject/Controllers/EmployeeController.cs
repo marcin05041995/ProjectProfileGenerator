@@ -17,7 +17,11 @@ namespace ApiToProject.Controllers
         }
 
         //[HttpGet()]
-        //public IActionResult GetEmployees() { }
+        public IActionResult GetEmployees()
+        {
+            var employeeFromRepo = _pgRepository.GetEmployees();
+            return new JsonResult(employeeFromRepo);
+        }
 
         //[HttpGet("{{id}}")]
         //public IActionResult GetEmployee() { }
