@@ -23,6 +23,10 @@ namespace ApiToProject.Entities
         [MaxLength(50,ErrorMessage ="Max 50 znaków")]
         public string Specialization { get; set; }
 
+        [Required(ErrorMessage = "Podaj rating")]
+        [Range(1, 5, ErrorMessage = "Zakres jest od 1 do 5")]
+        public int Rating { get; set; }
+
         [Required(ErrorMessage ="Podaj ilość lat pracy w zawodzie.")]
         [MaxLength(2,ErrorMessage ="Error")]
         public int YearsOfWork { get; set; }
@@ -34,8 +38,8 @@ namespace ApiToProject.Entities
         public ICollection<Skills> Skillss { get; set; }
         = new List<Skills>();
 
-        public ICollection<Language> Languages { get; set; }
-        = new List<Language>();
+        public ICollection<Languages> Languages { get; set; }
+        = new List<Languages>();
 
     }
 }

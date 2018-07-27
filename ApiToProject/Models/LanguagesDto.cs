@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ApiToProject.Models
 {
-    public class Languages
+    public class LanguagesDto
     {
         public string LanguageName { get; set; }
         public int SpeakingLevel { get; set; }

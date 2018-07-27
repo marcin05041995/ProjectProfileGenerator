@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ApiToProject.Entities;
+using ApiToProject.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ApiToProject.Services
 {
@@ -26,6 +28,42 @@ namespace ApiToProject.Services
             _context.Employees.Remove(employee);
         }
 
+        [HttpGet]
+        public void EditEmployee(Guid id)
+        {
+            Employee e = new Employee();
+
+            if(id != null)
+            {
+                Employee employee = new Employee();
+                if(employee != null)
+                {
+                    e.Id = employee.Id;
+                    e.FirstName = employee.FirstName;
+                    e.LastName = employee.LastName;
+                    e.Specialization = employee.Specialization;
+                    e.Rating = employee.Rating;
+                    e.YearsOfWork = employee.YearsOfWork;
+                }
+            }
+        }
+
+        [HttpPost]
+        public void EditEmployee(Guid id, Employee e)
+        {
+            bool IsNew = id != null; 
+            Employee employee= IsNew ? new Employee { }: 
+            _context.Set<Employee>().SingleOrDefault(s => s.Id == id);
+
+            employee.FirstName = e.FirstName;
+            employee.LastName = e.LastName;
+            employee.Specialization = e.Specialization;
+            employee.Rating = e.Rating;
+            employee.YearsOfWork = e.YearsOfWork;
+
+            _context.SaveChanges();
+        }
+
         public bool Save()
         {
             return (_context.SaveChanges() >= 0);
@@ -37,6 +75,14 @@ namespace ApiToProject.Services
             return _context.Employees
                 .OrderBy(a => a.FirstName)
                 .ThenBy(a => a.LastName)
+                .ToList();
+        }
+
+        public IEnumerable<Employee> GetEmployees(IEnumerable<Guid> employeeIds)
+        {
+            return _context.Employees.Where(a => employeeIds.Contains(a.Id))
+                .OrderBy(a => a.FirstName)
+                .OrderBy(a => a.LastName)
                 .ToList();
         }
     }

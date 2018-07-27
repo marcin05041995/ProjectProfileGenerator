@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using ApiToProject.Entities;
 using ApiToProject.Services;
+using ApiToProject.Models;
+using AutoMapper;
 
 namespace ApiToProject.Controllers
 {
@@ -20,7 +22,10 @@ namespace ApiToProject.Controllers
         public IActionResult GetEmployees()
         {
             var employeeFromRepo = _pgRepository.GetEmployees();
-            return new JsonResult(employeeFromRepo);
+            var employees = Mapper.Map<IEnumerable<EmployeeDto>>(employeeFromRepo);
+            return Ok(employees);
+
+           // return new JsonResult(employeeFromRepo);
         }
 
         //[HttpGet("{{id}}")]

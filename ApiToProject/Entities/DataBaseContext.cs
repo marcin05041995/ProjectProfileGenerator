@@ -17,5 +17,7 @@ namespace ApiToProject.Entities
 
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Projects> Projectss { get; set; }
+        public DbSet<Skills> Skillss { get; set; }
+        public DbSet<Languages> Languages { get; set; }
     }
 }

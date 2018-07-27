@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ApiToProject.Entities
 {
-    public class Language
+    public class Languages
     {
         [Required(ErrorMessage ="Podaj jezyk")]
         [MaxLength(20)]

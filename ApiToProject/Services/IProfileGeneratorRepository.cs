@@ -9,9 +9,12 @@ namespace ApiToProject.Services
     public interface IProfileGeneratorRepository
     {
         IEnumerable<Employee> GetEmployees();
-        //Author GetAuthor(Guid authorId);
+        Employee GetEmployees(Guid employeeId);
+        IEnumerable<Employee> GetEmployees(IEnumerable<Guid> employeeIds);
         void AddEmployee(Employee employee);
         void DeleteEmployee(Employee employee);
+        void EditEmployee(Guid id);
+        void EditEmployee(Guid id, Employee e);
         bool Save();
     }
 }
