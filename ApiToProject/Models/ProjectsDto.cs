@@ -13,7 +13,6 @@ namespace ApiToProject.Models
         public string Technologies { get; set; }
         public DateTime startDate { get; set; }
         public DateTime endDate { get; set; }
-
         public Guid EmployeeId { get; set; }
        
     }
