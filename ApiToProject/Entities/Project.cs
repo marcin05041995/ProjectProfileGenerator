@@ -29,6 +29,6 @@ namespace ApiToProject.Entities
 
 
 
-        public ICollection<EmployeeProject> EmplyeeProjects { get; set; }
+        public ICollection<EmployeeProject> EmployeeProjects { get; set; }
     }
 }

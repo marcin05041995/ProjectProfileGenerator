@@ -38,13 +38,15 @@ namespace ApiToProject.Entities
             ////.HasForeignKey(e=>e.EmployeeId);
 
 
+            //Many to many Employee to Project
+
 
             modelBuilder.Entity<EmployeeProject>()
                 .HasIndex(u => new { u.ProjectId, u.EmployeeId });
 
             modelBuilder.Entity<EmployeeProject>()
                 .HasOne(pe => pe.Project)
-                .WithMany(p => p.EmplyeeProjects)
+                .WithMany(p => p.EmployeeProjects)
                 .HasForeignKey(pc => pc.ProjectId)
                 .OnDelete(DeleteBehavior.Cascade);
 
@@ -53,6 +55,15 @@ namespace ApiToProject.Entities
                 .WithMany(p => p.EmployeeProject)
                 .HasForeignKey(pc => pc.EmployeeId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+
+            //---------------------------------------------
+
+
+
+
+
+
         }
 
     }
