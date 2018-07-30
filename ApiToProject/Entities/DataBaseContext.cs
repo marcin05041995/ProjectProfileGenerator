@@ -23,21 +23,6 @@ namespace ApiToProject.Entities
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
-
-            //modelBuilder.Entity<Employee>()
-            //    .HasMany(a => a._Projects);
-
-            //modelBuilder.Entity<Employee>()
-            //    .HasMany(b => b._Skills);
-
-            //modelBuilder.Entity<Employee>()
-            //    .HasMany(c => c.Languages);
-
-            //modelBuilder.Entity<Projects>()
-            //    .HasMany(d => d.Employees);
-            ////.HasForeignKey(e=>e.EmployeeId);
-
-
             //Many to many Employee to Project
 
 
@@ -52,15 +37,45 @@ namespace ApiToProject.Entities
 
             modelBuilder.Entity<EmployeeProject>()
                 .HasOne(pe => pe.Employee)
-                .WithMany(p => p.EmployeeProject)
+                .WithMany(p => p.EmployeeProjects)
                 .HasForeignKey(pc => pc.EmployeeId)
                 .OnDelete(DeleteBehavior.Cascade);
 
 
             //---------------------------------------------
 
+            modelBuilder.Entity<EmployeeLanguage>()
+                .HasIndex(u => new { u.EmployeeId, u.LanguageId });
+
+            modelBuilder.Entity<EmployeeLanguage>()
+                .HasOne(a => a.Employee)
+                .WithMany(a => a.EmployeeLanguages)
+                .HasForeignKey(a => a.LanguageId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<EmployeeLanguage>()
+                .HasOne(pe => pe.Language)
+                .WithMany(p => p.EmployeeLanguages)
+                .HasForeignKey(pc => pc.EmployeeId)
+                .OnDelete(DeleteBehavior.Cascade);
 
 
+            //------------------------------------------------------
+
+            modelBuilder.Entity<EmployeeSkill>()
+               .HasIndex(u => new { u.EmployeeId, u.SkillId });
+
+            modelBuilder.Entity<EmployeeSkill>()
+                .HasOne(x => x.Employee)
+                .WithMany(p => p.EmployeeSkills)
+                .HasForeignKey(pc => pc.SkillId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<EmployeeSkill>()
+                .HasOne(x => x.Skill)
+                .WithMany(p => p.EmployeeSkills)
+                .HasForeignKey(pc => pc.EmployeeId)
+                .OnDelete(DeleteBehavior.Cascade);
 
 
 

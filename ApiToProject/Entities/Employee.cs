@@ -31,13 +31,14 @@ namespace ApiToProject.Entities
         [MaxLength(2,ErrorMessage ="Error")]
         public int YearsOfWork { get; set; }
 
-        public ICollection<EmployeeProject> EmployeeProject { get; set; }
+        public ICollection<EmployeeProject> EmployeeProjects { get; set; }
+        public ICollection<EmployeeLanguage> EmployeeLanguages { get; set; }
+        public ICollection<EmployeeSkill> EmployeeSkills { get; set; }
+        //public ICollection<Skill> Skills { get; set; }
+        //= new List<Skill>();
 
-        public ICollection<Skill> Skills { get; set; }
-        = new List<Skill>();
-
-        public ICollection<Language> Languages { get; set; }
-        = new List<Language>();
+        //public ICollection<Language> Languages { get; set; }
+        //= new List<Language>();
 
     }
 }

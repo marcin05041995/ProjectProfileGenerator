@@ -47,6 +47,24 @@ namespace ApiToProject.Migrations
                     b.ToTable("Employees");
                 });
 
+            modelBuilder.Entity("ApiToProject.Entities.EmployeeLanguage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("EmployeeId");
+
+                    b.Property<int>("LanguageId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LanguageId");
+
+                    b.HasIndex("EmployeeId", "LanguageId");
+
+                    b.ToTable("EmployeeLanguage");
+                });
+
             modelBuilder.Entity("ApiToProject.Entities.EmployeeProject", b =>
                 {
                     b.Property<int>("Id")
@@ -65,12 +83,28 @@ namespace ApiToProject.Migrations
                     b.ToTable("EmployeeProject");
                 });
 
-            modelBuilder.Entity("ApiToProject.Entities.Language", b =>
+            modelBuilder.Entity("ApiToProject.Entities.EmployeeSkill", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("EmployeeId");
+                    b.Property<int>("EmployeeId");
+
+                    b.Property<int>("SkillId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SkillId");
+
+                    b.HasIndex("EmployeeId", "SkillId");
+
+                    b.ToTable("EmployeeSkill");
+                });
+
+            modelBuilder.Entity("ApiToProject.Entities.Language", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("LanguageName")
                         .IsRequired()
@@ -83,8 +117,6 @@ namespace ApiToProject.Migrations
                     b.Property<int>("WritingLevel");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("EmployeeId");
 
                     b.ToTable("Languages");
                 });
@@ -120,8 +152,6 @@ namespace ApiToProject.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("EmployeeId");
-
                     b.Property<double>("ExperienceInYears");
 
                     b.Property<int>("Profficiency");
@@ -132,15 +162,26 @@ namespace ApiToProject.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EmployeeId");
-
                     b.ToTable("Skills");
+                });
+
+            modelBuilder.Entity("ApiToProject.Entities.EmployeeLanguage", b =>
+                {
+                    b.HasOne("ApiToProject.Entities.Language", "Language")
+                        .WithMany("EmployeeLanguages")
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("ApiToProject.Entities.Employee", "Employee")
+                        .WithMany("EmployeeLanguages")
+                        .HasForeignKey("LanguageId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("ApiToProject.Entities.EmployeeProject", b =>
                 {
                     b.HasOne("ApiToProject.Entities.Employee", "Employee")
-                        .WithMany("EmployeeProject")
+                        .WithMany("EmployeeProjects")
                         .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade);
 
@@ -150,18 +191,17 @@ namespace ApiToProject.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("ApiToProject.Entities.Language", b =>
+            modelBuilder.Entity("ApiToProject.Entities.EmployeeSkill", b =>
                 {
-                    b.HasOne("ApiToProject.Entities.Employee")
-                        .WithMany("Languages")
-                        .HasForeignKey("EmployeeId");
-                });
+                    b.HasOne("ApiToProject.Entities.Skill", "Skill")
+                        .WithMany("EmployeeSkills")
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity("ApiToProject.Entities.Skill", b =>
-                {
-                    b.HasOne("ApiToProject.Entities.Employee")
-                        .WithMany("Skills")
-                        .HasForeignKey("EmployeeId");
+                    b.HasOne("ApiToProject.Entities.Employee", "Employee")
+                        .WithMany("EmployeeSkills")
+                        .HasForeignKey("SkillId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }
