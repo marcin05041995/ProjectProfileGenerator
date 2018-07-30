@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace ApiToProject.Entities
 {
-    public class Projects
+    public class Project
     {
         [Key]
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         [Required(ErrorMessage ="Uzupełnij pole: ")]
         [MaxLength(50,ErrorMessage ="Max 50 znaków")]
@@ -24,14 +24,11 @@ namespace ApiToProject.Entities
         [MaxLength(50, ErrorMessage = "Max 50 znaków")]
         public string Technologies { get; set; }
 
-        public DateTime startDate { get; set; }
-        public DateTime endDate { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
 
-        [ForeignKey("EmployeeId")]
-        public Employee Employee { get; set; }
-        public Guid EmployeeId { get; set; }
 
-        public ICollection<Employee> Employees { get; set; }
-        = new List<Employee>();
+
+        public ICollection<EmployeeProject> EmplyeeProjects { get; set; }
     }
 }

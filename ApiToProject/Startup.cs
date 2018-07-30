@@ -15,7 +15,7 @@ namespace ApiToProject
             services.AddMvc();
 
             var connectionString = @"Server=(localdb)\mssqllocaldb;Database=DbProfileGenerator;Trusted_Connection=True;";
-            services.AddDbContext<DataBaseContext>(o => o.UseSqlServer(connectionString));
+            services.AddDbContext<DataBaseContext>(o => o.UseSqlServer(connectionString));            
 
         }
 

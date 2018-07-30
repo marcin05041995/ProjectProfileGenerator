@@ -19,7 +19,7 @@ namespace ApiToProject.Services
 
         public void AddEmployee(Employee employee)
         {
-            employee.Id = Guid.NewGuid();
+            //employee.Id = Guid.NewGuid();
             _context.Employees.Add(employee);
         }
 
@@ -30,41 +30,41 @@ namespace ApiToProject.Services
 
 
         //Edit Efekty nieznane :)
-        [HttpGet]
-        public void EditEmployee(Guid id)
-        {
-            Employee e = new Employee();
+        //[HttpGet]
+        //public void EditEmployee(Guid id)
+        //{
+        //    Employee e = new Employee();
 
-            if(id != null)
-            {
-                Employee employee = new Employee();
-                if(employee != null)
-                {
-                    e.Id = employee.Id;
-                    e.FirstName = employee.FirstName;
-                    e.LastName = employee.LastName;
-                    e.Specialization = employee.Specialization;
-                    e.Rating = employee.Rating;
-                    e.YearsOfWork = employee.YearsOfWork;
-                }
-            }
-        }
+        //    if(id != null)
+        //    {
+        //        Employee employee = new Employee();
+        //        if(employee != null)
+        //        {
+        //            e.Id = employee.Id;
+        //            e.FirstName = employee.FirstName;
+        //            e.LastName = employee.LastName;
+        //            e.Specialization = employee.Specialization;
+        //            e.Rating = employee.Rating;
+        //            e.YearsOfWork = employee.YearsOfWork;
+        //        }
+        //    }
+        //}
 
-        [HttpPost]
-        public void EditEmployee(Guid id, Employee e)
-        {
-            bool IsNew = id != null; 
-            Employee employee= IsNew ? new Employee { }: 
-            _context.Set<Employee>().SingleOrDefault(s => s.Id == id);
+        //[HttpPost]
+        //public void EditEmployee(int id, Employee e)
+        //{
+        //    bool IsNew = id != null; 
+        //    Employee employee= IsNew ? new Employee { }: 
+        //    _context.Set<Employee>().SingleOrDefault(s => s.Id == id);
 
-            employee.FirstName = e.FirstName;
-            employee.LastName = e.LastName;
-            employee.Specialization = e.Specialization;
-            employee.Rating = e.Rating;
-            employee.YearsOfWork = e.YearsOfWork;
+        //    employee.FirstName = e.FirstName;
+        //    employee.LastName = e.LastName;
+        //    employee.Specialization = e.Specialization;
+        //    employee.Rating = e.Rating;
+        //    employee.YearsOfWork = e.YearsOfWork;
 
-            _context.SaveChanges();
-        }
+        //    _context.SaveChanges();
+        //}
 
         public bool Save()
         {
@@ -80,7 +80,7 @@ namespace ApiToProject.Services
                 .ToList();
         }
 
-        public IEnumerable<Employee> GetEmployees(IEnumerable<Guid> employeeIds)
+        public IEnumerable<Employee> GetEmployees(IEnumerable<int> employeeIds)
         {
             return _context.Employees.Where(a => employeeIds.Contains(a.Id))
                 .OrderBy(a => a.FirstName)
@@ -88,7 +88,7 @@ namespace ApiToProject.Services
                 .ToList();
         }
 
-        public Employee GetEmployee(Guid employeeId)
+        public Employee GetEmployee(int employeeId)
         {
             return _context.Employees.FirstOrDefault(a => a.Id == employeeId);
         }

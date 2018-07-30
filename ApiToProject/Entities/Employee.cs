@@ -9,7 +9,7 @@ namespace ApiToProject.Entities
     public class Employee
     {
         [Key]
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         [Required(ErrorMessage ="Podaj imie")]
         [MaxLength(20,ErrorMessage ="Max 20 znaków")]
@@ -31,15 +31,13 @@ namespace ApiToProject.Entities
         [MaxLength(2,ErrorMessage ="Error")]
         public int YearsOfWork { get; set; }
 
-        public Guid ProjectId { get; set; }
-        public ICollection<Projects> Projectss { get; set; }
-        = new List<Projects>();
+        public ICollection<EmployeeProject> EmployeeProject { get; set; }
 
-        public ICollection<Skills> Skillss { get; set; }
-        = new List<Skills>();
+        public ICollection<Skill> Skills { get; set; }
+        = new List<Skill>();
 
-        public ICollection<Languages> Languages { get; set; }
-        = new List<Languages>();
+        public ICollection<Language> Languages { get; set; }
+        = new List<Language>();
 
     }
 }

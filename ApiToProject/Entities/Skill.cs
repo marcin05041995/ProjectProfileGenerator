@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace ApiToProject.Entities
 {
-    public class Skills
+    public class Skill
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         [Required(ErrorMessage ="Uzupełnij pole")]
         [MaxLength(20)]
