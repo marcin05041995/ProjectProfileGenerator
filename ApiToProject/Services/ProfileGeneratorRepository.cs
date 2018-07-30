@@ -17,11 +17,18 @@ namespace ApiToProject.Services
             _context = context;
         }
 
-        public void AddEmployee(Employee employee)
+        //public void AddEmployee(Employee employee)
+        //{
+        //    //employee.Id = Guid.NewGuid();
+        //    _context.Employees.Add(employee);
+        //}
+
+        public void AddEmployee(int id,Employee employee)
         {
-            //employee.Id = Guid.NewGuid();
+            employee.Id = id;
             _context.Employees.Add(employee);
         }
+
 
         public void DeleteEmployee(Employee employee)
         {
