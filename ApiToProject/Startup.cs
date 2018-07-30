@@ -14,7 +14,7 @@ namespace ApiToProject
             //    opt.UseInMemoryDatabase("EmployeeList"));
             services.AddMvc();
 
-            var connectionString = @"Server=(localdb)\mssqllocaldb;Database=ProfileGeneratorDB;Trusted_Connection=True;";
+            var connectionString = @"Server=(localdb)\mssqllocaldb;Database=DbProfileGenerator;Trusted_Connection=True;";
             services.AddDbContext<DataBaseContext>(o => o.UseSqlServer(connectionString));
 
         }
@@ -28,6 +28,8 @@ namespace ApiToProject
                 cfg.CreateMap<Entities.Employee, Models.EmployeeDto>()
                     .ForMember(dest => dest.FirstName, opt => opt.MapFrom(src =>
                        $"{src.FirstName} {src.LastName} {src.Specialization} {src.YearsOfWork}"));
+
+                cfg.CreateMap<Models.EmployeeForCreationDto, Entities.Employee>();
             });
 
         }

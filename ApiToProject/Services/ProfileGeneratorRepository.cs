@@ -28,6 +28,8 @@ namespace ApiToProject.Services
             _context.Employees.Remove(employee);
         }
 
+
+        //Edit Efekty nieznane :)
         [HttpGet]
         public void EditEmployee(Guid id)
         {
@@ -84,6 +86,11 @@ namespace ApiToProject.Services
                 .OrderBy(a => a.FirstName)
                 .OrderBy(a => a.LastName)
                 .ToList();
+        }
+
+        public Employee GetEmployee(Guid employeeId)
+        {
+            return _context.Employees.FirstOrDefault(a => a.Id == employeeId);
         }
     }
 }

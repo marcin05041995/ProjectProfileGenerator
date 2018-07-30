@@ -9,7 +9,7 @@ namespace ApiToProject.Services
     public interface IProfileGeneratorRepository
     {
         IEnumerable<Employee> GetEmployees();
-        Employee GetEmployees(Guid employeeId);
+        Employee GetEmployee(Guid employeeId);
         IEnumerable<Employee> GetEmployees(IEnumerable<Guid> employeeIds);
         void AddEmployee(Employee employee);
         void DeleteEmployee(Employee employee);

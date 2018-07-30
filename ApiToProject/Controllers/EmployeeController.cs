@@ -5,6 +5,7 @@ using ApiToProject.Entities;
 using ApiToProject.Services;
 using ApiToProject.Models;
 using AutoMapper;
+using System;
 
 namespace ApiToProject.Controllers
 {
@@ -18,7 +19,16 @@ namespace ApiToProject.Controllers
             _pgRepository = pgRepository;
         }
 
-        //[HttpGet()]
+
+        /*--------------------------------------------------
+         * --------------------------------------------
+         * ---------------------------------------------
+         * ----------------------------------------------
+         * -----------------------------------------------*/
+
+
+
+        [HttpGet()]
         public IActionResult GetEmployees()
         {
             var employeeFromRepo = _pgRepository.GetEmployees();
@@ -28,22 +38,85 @@ namespace ApiToProject.Controllers
            // return new JsonResult(employeeFromRepo);
         }
 
-        //[HttpGet("{{id}}")]
-        //public IActionResult GetEmployee() { }
+
+            /*--------------------------------------------------
+            * --------------------------------------------
+            * ---------------------------------------------
+            * ----------------------------------------------
+            * -----------------------------------------------*/
+
+
+        [HttpGet("{id}", Name = "GetEmployee")]
+        public IActionResult GetEmployee(Guid id)
+        {
+            var employeeFromRepo = _pgRepository.GetEmployee(id);
+
+            if (employeeFromRepo == null)
+            {
+                return NotFound();
+            }
+
+            var e = Mapper.Map<EmployeeDto>(employeeFromRepo);
+            return Ok(e);
+        }
+
+            /*--------------------------------------------------
+            * --------------------------------------------
+            * ---------------------------------------------
+            * ----------------------------------------------
+            * -----------------------------------------------*/
 
 
 
-        //private readonly DataBaseContext _context;
+        [HttpPost]
+        public IActionResult CreateEmployee([FromBody] EmployeeForCreationDto employee)
+        {
+            if (employee == null)
+            {
+                return BadRequest();
+            }
 
-        //public EmployeeController(DataBaseContext context)
-        //{
-        //    _context = context;
+            var employeeEntity = Mapper.Map<Employee>(employee);
 
-        //    if (_context.Employees.Count() == 0)
-        //    {
-        //        _context.Employees.Add(new Employee { Id=new System.Guid(), Name="Jan" , LastName="Kowalski"  , Specialization=".NET Developer" ,YearsOfWork=2});
-        //        _context.SaveChanges();
-        //    }
-        //}
+            _pgRepository.AddEmployee(employeeEntity);
+
+            if(!_pgRepository.Save())
+            {
+                throw new Exception("Creating an employee failed on save.");
+            }
+
+            var employeeToReturn = Mapper.Map<EmployeeDto>(employeeEntity);
+
+            return CreatedAtRoute("GetEmployee", new { id = employeeToReturn.Id }, employeeToReturn);
+        }
+
+
+
+            /*--------------------------------------------------
+            * --------------------------------------------
+            * ---------------------------------------------
+            * ----------------------------------------------
+            * -----------------------------------------------*/
+
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteEmployee(Guid id)
+        {
+            var employeeFromRepo = _pgRepository.GetEmployee(id);
+            if(employeeFromRepo == null)
+            {
+                return NotFound();
+            }
+
+            _pgRepository.DeleteEmployee(employeeFromRepo);
+
+            if(!_pgRepository.Save())
+            {
+                throw new Exception($"Deleting author {id} failed on save.");
+            }
+
+            return NoContent();
+        }
+
     }
 }

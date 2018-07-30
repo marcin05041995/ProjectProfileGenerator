@@ -5,9 +5,8 @@ using System.Threading.Tasks;
 
 namespace ApiToProject.Models
 {
-    public class SkillsDto
+    public class SkillsForCreationDto
     {
-        public Guid Id { get; set; }
         public string SkillName { get; set; }
         public int ExperienceInYears { get; set; }
         public int Profficiency { get; set; }
