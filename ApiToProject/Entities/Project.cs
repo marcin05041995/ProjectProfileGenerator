@@ -10,7 +10,7 @@ namespace ApiToProject.Entities
     public class Project
     {
         [Key]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [Required(ErrorMessage ="Uzupełnij pole: ")]
         [MaxLength(50,ErrorMessage ="Max 50 znaków")]

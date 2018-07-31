@@ -8,7 +8,7 @@ namespace ApiToProject.Entities
 {
     public class Skill
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [Required(ErrorMessage ="Uzupełnij pole")]
         [MaxLength(20)]

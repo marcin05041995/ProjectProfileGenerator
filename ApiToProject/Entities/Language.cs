@@ -8,7 +8,7 @@ namespace ApiToProject.Entities
 {
     public class Language
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [Required(ErrorMessage ="Podaj jezyk")]
         [MaxLength(20)]

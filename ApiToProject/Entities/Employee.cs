@@ -9,7 +9,7 @@ namespace ApiToProject.Entities
     public class Employee
     {
         [Key]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [Required(ErrorMessage ="Podaj imie")]
         [MaxLength(20,ErrorMessage ="Max 20 znaków")]

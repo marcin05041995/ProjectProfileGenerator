@@ -22,7 +22,7 @@ namespace ApiToProject.Migrations
 
             modelBuilder.Entity("ApiToProject.Entities.Employee", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("FirstName")
@@ -49,12 +49,12 @@ namespace ApiToProject.Migrations
 
             modelBuilder.Entity("ApiToProject.Entities.EmployeeLanguage", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("EmployeeId");
+                    b.Property<Guid>("EmployeeId");
 
-                    b.Property<int>("LanguageId");
+                    b.Property<Guid>("LanguageId");
 
                     b.HasKey("Id");
 
@@ -67,12 +67,12 @@ namespace ApiToProject.Migrations
 
             modelBuilder.Entity("ApiToProject.Entities.EmployeeProject", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("EmployeeId");
+                    b.Property<Guid>("EmployeeId");
 
-                    b.Property<int>("ProjectId");
+                    b.Property<Guid>("ProjectId");
 
                     b.HasKey("Id");
 
@@ -85,12 +85,12 @@ namespace ApiToProject.Migrations
 
             modelBuilder.Entity("ApiToProject.Entities.EmployeeSkill", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("EmployeeId");
+                    b.Property<Guid>("EmployeeId");
 
-                    b.Property<int>("SkillId");
+                    b.Property<Guid>("SkillId");
 
                     b.HasKey("Id");
 
@@ -103,7 +103,7 @@ namespace ApiToProject.Migrations
 
             modelBuilder.Entity("ApiToProject.Entities.Language", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("LanguageName")
@@ -123,7 +123,7 @@ namespace ApiToProject.Migrations
 
             modelBuilder.Entity("ApiToProject.Entities.Project", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("ClientSector")
@@ -149,7 +149,7 @@ namespace ApiToProject.Migrations
 
             modelBuilder.Entity("ApiToProject.Entities.Skill", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<double>("ExperienceInYears");

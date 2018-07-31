@@ -14,9 +14,9 @@ namespace ApiToProject.Entities
 
             var employees = new List<Employee>()
             {
-                new Employee(){Id=1,FirstName="Jan",LastName="Kowalski",Specialization=".Net Developer", YearsOfWork=2},
-                new Employee(){Id=2,FirstName="Sebastian",LastName="Nowak",Specialization=".Net Developer", YearsOfWork=1},
-                new Employee(){Id=3,FirstName="Wojtek",LastName="Sarski",Specialization=".Net Developer", YearsOfWork=3}
+                new Employee(){Id=new Guid("25320c5e-f58a-4b1f-b63a-8ee07a840bdf"),FirstName="Jan",LastName="Kowalski",Specialization=".Net Developer", YearsOfWork=2},
+                new Employee(){Id=new Guid("35320c5e-f58a-4b1f-b63a-8ee07a840bdf"),FirstName="Sebastian",LastName="Nowak",Specialization=".Net Developer", YearsOfWork=1},
+                new Employee(){Id=new Guid("45320c5e-f58a-4b1f-b63a-8ee07a840bdf"),FirstName="Wojtek",LastName="Sarski",Specialization=".Net Developer", YearsOfWork=3}
             };
 
             context.Employees.AddRange(employees);

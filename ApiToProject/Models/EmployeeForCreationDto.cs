@@ -13,10 +13,10 @@ namespace ApiToProject.Models
         public int Rating { get; set; }
         public int YearsOfWork { get; set; }
 
-        public ICollection<ProjectsForCreationDto> Projectss { get; set; }
+        public ICollection<ProjectsForCreationDto> Projects { get; set; }
         = new List<ProjectsForCreationDto>();
 
-        public ICollection<SkillsForCreationDto> Skillss { get; set; }
+        public ICollection<SkillsForCreationDto> Skills { get; set; }
         = new List<SkillsForCreationDto>();
 
         public ICollection<LanguagesForCreationDto> Languages { get; set; }

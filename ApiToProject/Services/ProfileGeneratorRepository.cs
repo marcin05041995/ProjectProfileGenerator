@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ApiToProject.Services
 {
-    public class ProfileGeneratorRepository
+    public class ProfileGeneratorRepository : IProfileGeneratorRepository
     {
         private DataBaseContext _context;
 
@@ -17,17 +17,17 @@ namespace ApiToProject.Services
             _context = context;
         }
 
-        //public void AddEmployee(Employee employee)
-        //{
-        //    //employee.Id = Guid.NewGuid();
-        //    _context.Employees.Add(employee);
-        //}
-
-        public void AddEmployee(int id,Employee employee)
+        public void AddEmployee(Employee employee)
         {
-            employee.Id = id;
+            employee.Id = Guid.NewGuid();
             _context.Employees.Add(employee);
         }
+
+        //public void AddEmployee(int id,Employee employee)
+        //{
+        //    employee.Id = id;
+        //    _context.Employees.Add(employee);
+        //}
 
 
         public void DeleteEmployee(Employee employee)
@@ -87,7 +87,7 @@ namespace ApiToProject.Services
                 .ToList();
         }
 
-        public IEnumerable<Employee> GetEmployees(IEnumerable<int> employeeIds)
+        public IEnumerable<Employee> GetEmployees(IEnumerable<Guid> employeeIds)
         {
             return _context.Employees.Where(a => employeeIds.Contains(a.Id))
                 .OrderBy(a => a.FirstName)
@@ -95,7 +95,7 @@ namespace ApiToProject.Services
                 .ToList();
         }
 
-        public Employee GetEmployee(int employeeId)
+        public Employee GetEmployee(Guid employeeId)
         {
             return _context.Employees.FirstOrDefault(a => a.Id == employeeId);
         }

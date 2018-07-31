@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ApiToProject.Entities;
 
+
 namespace ApiToProject.Services
 {
     public interface IProfileGeneratorRepository
@@ -13,8 +14,8 @@ namespace ApiToProject.Services
         IEnumerable<Employee> GetEmployees(IEnumerable<Guid> employeeIds);
         void AddEmployee(Employee employee);
         void DeleteEmployee(Employee employee);
-        void EditEmployee(Guid id);
-        void EditEmployee(Guid id, Employee e);
+        //void EditEmployee(Guid id);
+        //void EditEmployee(Guid id, Employee e);
         bool Save();
     }
 }

@@ -10,8 +10,10 @@ namespace ApiToProject.Models
         public string Title { get; set; }
         public string ClientSector { get; set; }
         public string Technologies { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
 
-        public ICollection<EmployeeForCreationDto> Employees { get; set; }
-        = new List<EmployeeForCreationDto>();
+        //public ICollection<EmployeeForCreationDto> Employees { get; set; }
+        //= new List<EmployeeForCreationDto>();
     }
 }

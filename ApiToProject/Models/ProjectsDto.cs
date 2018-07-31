@@ -11,8 +11,8 @@ namespace ApiToProject.Models
         public string Title { get; set; }
         public string ClientSector { get; set; }
         public string Technologies { get; set; }
-        public DateTime startDate { get; set; }
-        public DateTime endDate { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
         public Guid EmployeeId { get; set; }
        
     }

@@ -7,10 +7,10 @@ namespace ApiToProject.Entities
 {
     public class EmployeeLanguage
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
-        public int EmployeeId { get; set; }
-        public int LanguageId { get; set; }
+        public Guid EmployeeId { get; set; }
+        public Guid LanguageId { get; set; }
 
         public Employee Employee { get; set; }
         public Language Language { get; set; }

@@ -3,6 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using ApiToProject.Entities;
+using ApiToProject.Services;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+
 
 namespace ApiToProject
 {
@@ -15,13 +19,16 @@ namespace ApiToProject
             services.AddMvc();
 
             var connectionString = @"Server=(localdb)\mssqllocaldb;Database=DbProfileGenerator;Trusted_Connection=True;";
-            services.AddDbContext<DataBaseContext>(o => o.UseSqlServer(connectionString));            
+            services.AddDbContext<DataBaseContext>(o => o.UseSqlServer(connectionString));
+
+            //register repo
+            services.AddScoped<IProfileGeneratorRepository, ProfileGeneratorRepository> ();
 
         }
 
-        public void Configure(IApplicationBuilder app)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, DataBaseContext dataBaseContext)
         {
-            app.UseMvc();
+            
 
             AutoMapper.Mapper.Initialize(cfg =>
             {
@@ -32,6 +39,9 @@ namespace ApiToProject
                 cfg.CreateMap<Models.EmployeeForCreationDto, Entities.Employee>();
             });
 
+            dataBaseContext.SeedDataForContext();
+
+            app.UseMvc();
         }
     }
 }

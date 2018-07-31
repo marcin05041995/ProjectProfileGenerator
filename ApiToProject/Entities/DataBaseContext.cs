@@ -20,6 +20,8 @@ namespace ApiToProject.Entities
         public DbSet<Skill> Skills { get; set; }
         public DbSet<Language> Languages { get; set; }
 
+      
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
@@ -78,8 +80,9 @@ namespace ApiToProject.Entities
                 .OnDelete(DeleteBehavior.Cascade);
 
 
-
         }
+
+
 
     }
 }

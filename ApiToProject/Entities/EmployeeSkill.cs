@@ -7,10 +7,10 @@ namespace ApiToProject.Entities
 {
     public class EmployeeSkill
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
-        public int EmployeeId { get; set; }
-        public int SkillId { get; set; }
+        public Guid EmployeeId { get; set; }
+        public Guid SkillId { get; set; }
 
         public Skill Skill { get; set; }
         public Employee Employee { get; set; }
