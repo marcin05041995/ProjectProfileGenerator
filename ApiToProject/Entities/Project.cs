@@ -27,8 +27,11 @@ namespace ApiToProject.Entities
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
 
-
-
         public ICollection<EmployeeProject> EmployeeProjects { get; set; }
+
+        //Dodawanie do pracownika - To nie jest potrzebne poniewa juz jest w EmployeeProject 
+        //[ForeignKey("EmployeeId")]
+        //public Employee Employee { get; set; }
+        //public Guid EmployeeId { get; set; }
     }
 }

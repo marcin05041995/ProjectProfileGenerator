@@ -20,6 +20,8 @@ namespace ApiToProject.Entities
         public DbSet<Skill> Skills { get; set; }
         public DbSet<Language> Languages { get; set; }
 
+        public DbSet<EmployeeProject> EmployeeProjects { get; set; }
+
       
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

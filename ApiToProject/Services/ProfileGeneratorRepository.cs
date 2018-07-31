@@ -17,68 +17,8 @@ namespace ApiToProject.Services
             _context = context;
         }
 
-        public void AddEmployee(Employee employee)
-        {
-            employee.Id = Guid.NewGuid();
-            _context.Employees.Add(employee);
-        }
+        //CRUD pracownika
 
-        //public void AddEmployee(int id,Employee employee)
-        //{
-        //    employee.Id = id;
-        //    _context.Employees.Add(employee);
-        //}
-
-
-        public void DeleteEmployee(Employee employee)
-        {
-            _context.Employees.Remove(employee);
-        }
-
-
-        //Edit Efekty nieznane :)
-        //[HttpGet]
-        //public void EditEmployee(Guid id)
-        //{
-        //    Employee e = new Employee();
-
-        //    if(id != null)
-        //    {
-        //        Employee employee = new Employee();
-        //        if(employee != null)
-        //        {
-        //            e.Id = employee.Id;
-        //            e.FirstName = employee.FirstName;
-        //            e.LastName = employee.LastName;
-        //            e.Specialization = employee.Specialization;
-        //            e.Rating = employee.Rating;
-        //            e.YearsOfWork = employee.YearsOfWork;
-        //        }
-        //    }
-        //}
-
-        //[HttpPost]
-        //public void EditEmployee(int id, Employee e)
-        //{
-        //    bool IsNew = id != null; 
-        //    Employee employee= IsNew ? new Employee { }: 
-        //    _context.Set<Employee>().SingleOrDefault(s => s.Id == id);
-
-        //    employee.FirstName = e.FirstName;
-        //    employee.LastName = e.LastName;
-        //    employee.Specialization = e.Specialization;
-        //    employee.Rating = e.Rating;
-        //    employee.YearsOfWork = e.YearsOfWork;
-
-        //    _context.SaveChanges();
-        //}
-
-        public bool Save()
-        {
-            return (_context.SaveChanges() >= 0);
-        }
-
-        //public Employee GetEmployee(Guid employeeId){ }
         public IEnumerable<Employee> GetEmployees()
         {
             return _context.Employees
@@ -99,5 +39,59 @@ namespace ApiToProject.Services
         {
             return _context.Employees.FirstOrDefault(a => a.Id == employeeId);
         }
+
+        public void AddEmployee(Employee employee)
+        {
+            employee.Id = Guid.NewGuid();
+            _context.Employees.Add(employee);
+        }
+
+        public void DeleteEmployee(Employee employee)
+        {
+            _context.Employees.Remove(employee);
+        }
+
+        public void UpdateAuthor(Employee employee)
+        {
+            // no code in this implementation
+        }
+
+        public bool Save()
+        {
+            return (_context.SaveChanges() >= 0);
+        }
+
+        //---------------------------------------------------------------
+        //---------------------------------------------------------------
+        //---------------------------------------------------------------
+        //---------------------------------------------------------------
+        //---------------------------------------------------------------
+
+
+        public EmployeeProject GetProjectForAuthor(Guid employeeId, Guid projectId)
+        {
+            return _context.EmployeeProjects
+                .Where(b => b.EmployeeId == employeeId && b.ProjectId == projectId).FirstOrDefault();
+        }
+
+        public IEnumerable<EmployeeProject> GetProjectsForEmployee(Guid employeeId)
+        {
+            return _context.EmployeeProjects
+                .Where(b => b.EmployeeId == employeeId).OrderBy(b => b.Project.Title).ToList();
+        }
+
+        public void AddProjectForEmployee(Guid employeeId, EmployeeProject project)
+        {
+            var employee = GetEmployee(employeeId);
+            if (employee != null)
+            {
+                if (employee.Id == Guid.Empty)
+                {
+                    employee.Id = Guid.NewGuid();
+                }
+                employee.EmployeeProjects.Add(project);
+            }
+        }
+
     }
 }

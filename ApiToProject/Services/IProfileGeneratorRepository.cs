@@ -14,8 +14,12 @@ namespace ApiToProject.Services
         IEnumerable<Employee> GetEmployees(IEnumerable<Guid> employeeIds);
         void AddEmployee(Employee employee);
         void DeleteEmployee(Employee employee);
-        //void EditEmployee(Guid id);
-        //void EditEmployee(Guid id, Employee e);
+        void UpdateAuthor(Employee employee);
+
+        IEnumerable<EmployeeProject> GetProjectsForEmployee(Guid employeeId);
+        EmployeeProject GetProjectForEmployee(Guid employeeId, Guid projectId);
+        void AddProjectForEmployee(Guid employeeId, EmployeeProject project);
+
         bool Save();
     }
 }
