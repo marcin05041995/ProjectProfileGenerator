@@ -12,15 +12,12 @@ namespace ApiToProject.Entities
         public Guid Id { get; set; }
 
         [Required(ErrorMessage ="Podaj imie")]
-        [MaxLength(20,ErrorMessage ="Max 20 znaków")]
         public string FirstName { get; set; }
 
         [Required(ErrorMessage ="Podaj nazwisko")]
-        [MaxLength(30,ErrorMessage ="Max 30 znaków")]
         public string LastName { get; set; }
         
         [Required(ErrorMessage ="Podaj specjzalizacje")]
-        [MaxLength(50,ErrorMessage ="Max 50 znaków")]
         public string Specialization { get; set; }
 
         [Required(ErrorMessage = "Podaj rating")]

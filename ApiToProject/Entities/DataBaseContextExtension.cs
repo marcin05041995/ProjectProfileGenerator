@@ -31,18 +31,54 @@ namespace ApiToProject.Entities
                     new Project(){Title="Ecologistics",ClientSector="Spedition",Technologies=".Net/C#, MS SQL, MVC 5",StartDate=new DateTime(2018,02,10),EndDate=new DateTime(2018,03,15)}
                 };
 
-
-
-                    context.Projects.AddRange(projects);
-                    context.Employees.AddRange(employees);
-                    context.SaveChanges();
-
-                    var employeeproject = new List<EmployeeProject>() {
-                 new EmployeeProject { EmployeeId=employees[0].Id,ProjectId=projects[0].Id},
-                 new EmployeeProject { EmployeeId=employees[0].Id,ProjectId=projects[1].Id}
+                var languages = new List<Language>()
+                {
+                    new Language(){LanguageName="English"},
+                    new Language(){LanguageName="Polish"},
+                    new Language(){LanguageName="Spanish"},
+                    new Language(){LanguageName="German"},
+                    new Language(){LanguageName="French"},
+                    new Language(){LanguageName="Italian"}
                 };
 
+                 var skills = new List<Skill>()
+                {
+                    new Skill() {SkillName="Windows Forms"},
+                    new Skill() {SkillName="C#"},
+                    new Skill() {SkillName="UML"},
+                    new Skill() {SkillName="Entity Framework"},
+                    new Skill() {SkillName="ASP.Net"},
+                    new Skill() {SkillName="Javascript/Jquery"}
+                };
+
+
+                context.Languages.AddRange(languages);
+                context.Skills.AddRange(skills);
+                context.Projects.AddRange(projects);
+                context.Employees.AddRange(employees);
+                context.SaveChanges();
+
+                 var employeeproject = new List<EmployeeProject>() {
+                 new EmployeeProject { EmployeeId=employees[0].Id,ProjectId=projects[0].Id},
+                 new EmployeeProject { EmployeeId=employees[1].Id,ProjectId=projects[1].Id}     //01
+                };
+
+                var employeeskill = new List<EmployeeSkill>()
+                {
+                 new EmployeeSkill { EmployeeId=employees[0].Id,SkillId=projects[0].Id},
+                 new EmployeeSkill { EmployeeId=employees[1].Id,SkillId=projects[1].Id}
+                };
+
+                var employeelanguage = new List<EmployeeLanguage>()
+                {
+                 new EmployeeLanguage { EmployeeId=employees[0].Id,LanguageId=projects[0].Id},
+                 new EmployeeLanguage { EmployeeId=employees[1].Id,LanguageId=projects[1].Id}
+                };
+
+
                     context.EmployeeProjects.AddRange(employeeproject);
+                    context.EmployeeSkills.AddRange(employeeskill);
+                    context.EmployeeLanguages.AddRange(employeelanguage);
                     context.SaveChanges();
                 }
                 catch (Exception ex)

@@ -1,4 +1,5 @@
 ﻿using ApiToProject.Entities;
+using ApiToProject.InputModels;
 using ApiToProject.Models;
 using ApiToProject.Services;
 using AutoMapper;
@@ -7,11 +8,12 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace ApiToProject.Controllers
 {
-    [Route("api/employees/{employeeId}/projects")]
+    [Route("api/employees")]
     public class ProfileController:Controller
     {
         private readonly DataBaseContext context;
@@ -115,8 +117,124 @@ namespace ApiToProject.Controllers
 
         }
 
+        [Route("GetEmployee")]
+        [HttpGet]
+        public IActionResult GetEmployee(Guid Id)
+        {
+            var output = new EmployeeViewModel
+            {
+                Profile = GenerateProfile(Id),
+                Skills = GenerateSkills(Id),
+                Languages = GenerateLanguage(Id),
+                Projects = GenerateProject(Id)
+            };
+            return StatusCode(200, output);
+        }
+
+        [HttpPost]
+        public IActionResult AddEmployee(InputEmployeeModel employeeInputModel)
+        {
+
+            context.Employees.Add(new Employee()
+            {
+                FirstName = employeeInputModel.Name,
+                LastName = employeeInputModel.LastName,
+                Specialization = employeeInputModel.Specialization,
+                Rating = employeeInputModel.Rating,
+                YearsOfWork =int.Parse(employeeInputModel.OverallTenure)
+            });
+            context.SaveChanges();
+            return StatusCode((int)HttpStatusCode.OK);
+        }
+
+        [HttpGet]
+        public IActionResult EditEmployee(Guid id)
+        {
+            if (id == null)
+                return new StatusCodeResult((int)HttpStatusCode.BadRequest);
+            var employee = context.Employees.FirstOrDefault(x => x.Id == id);
+
+            if (employee == null)
+                return new StatusCodeResult((int)HttpStatusCode.NotFound);
+
+            return StatusCode((int)HttpStatusCode.OK);
+        }
+
+        [HttpPost]
+        public IActionResult EditEmployee(InputEmployeeModel inputEmployeeModel)
+        {
+            if (inputEmployeeModel == null)
+                return new StatusCodeResult((int)HttpStatusCode.BadRequest);
+            var employee = context.Employees.FirstOrDefault(x => x.Id == inputEmployeeModel.Id);
+
+            if (employee == null)
+                return new StatusCodeResult((int)HttpStatusCode.NotFound);
+
+            employee.FirstName = inputEmployeeModel.Name;
+            employee.LastName = inputEmployeeModel.LastName;
+            employee.Specialization = inputEmployeeModel.Specialization;
+            employee.Rating = inputEmployeeModel.Rating;
+            employee.YearsOfWork = int.Parse(inputEmployeeModel.OverallTenure);
+
+            context.SaveChanges();
+
+            return StatusCode((int)HttpStatusCode.OK);
+        }
+
+        public IActionResult DeleteEmployee(Guid Id)
+        {
+            Employee employee = context.Employees.Find(Id);
+            context.Employees.Remove(employee);
+
+            context.SaveChanges();
+            return StatusCode((int)HttpStatusCode.OK);
+        }
+
+
+
+
+
+        //private IProfileGeneratorServices services;
+
+        //public ProfileController(IProfileGeneratorServices services)
+        //{
+        //    this.services = services;
+        //}
+
+        //[Route("CreateEmployee")]
+        //[HttpPost]
+        //public IActionResult CreateEmployee([FromBody]InputEmployeeModel e)
+        //{
+        //    if(e==null)
+        //    { return BadRequest(); }
+
+        //    var employeeEntity = Mapper.Map<Employee>(e);
+        //    services.AddEmployee(employeeEntity);
+
+        //    var employeeToReturn = Mapper.Map<InputEmployeeModel>(employeeEntity);
+
+        //    return CreatedAtRoute("AddEmployee", new { id = employeeToReturn.Id }, employeeToReturn);
+
+        //}
+
+        ////[HttpDelete("{id}")]
+        //public IActionResult DeleteEmployee(Guid id)
+        //{
+        //    var e = services.GetEmployee(id);
+        //    if (e == null){ return NotFound(); }
+
+        //    services.DeleteEmployee(e);
+        //    return NoContent();
+        //}
+
+        //[HttpGet]
+        //public IActionResult EditEmployee() { }
+
+        //[HttpPost]
+        //public IActionResult EditEmployee() { }
 
     }
-    
+
 }
+
 

@@ -11,7 +11,6 @@ namespace ApiToProject.Entities
         public Guid Id { get; set; }
 
         [Required(ErrorMessage ="Uzupełnij pole")]
-        [MaxLength(20)]
         public string SkillName { get; set; }
 
 

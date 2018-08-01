@@ -22,7 +22,7 @@ namespace ApiToProject
             services.AddDbContext<DataBaseContext>(o => o.UseSqlServer(connectionString));
 
             //register repo
-            services.AddScoped<IProfileGeneratorRepository, ProfileGeneratorRepository> ();
+            services.AddScoped<IProfileGeneratorServices, ProfileGeneratorServices> ();
 
         }
 
@@ -32,11 +32,11 @@ namespace ApiToProject
 
             AutoMapper.Mapper.Initialize(cfg =>
             {
-                cfg.CreateMap<Entities.Employee, Models.EmployeeDto>()
-                    .ForMember(dest => dest.FirstName, opt => opt.MapFrom(src =>
+                cfg.CreateMap<Entities.Employee, Models.Profile>()
+                    .ForMember(dest => dest.Name, opt => opt.MapFrom(src =>
                        $"{src.FirstName} {src.LastName} {src.Specialization} {src.YearsOfWork}"));
 
-                cfg.CreateMap<Models.EmployeeForCreationDto, Entities.Employee>();
+                cfg.CreateMap<InputModels.InputEmployeeModel, Entities.Employee>();
             });
 
             app.UseMvc();

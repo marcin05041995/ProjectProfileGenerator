@@ -7,7 +7,7 @@ using ApiToProject.Entities;
 
 namespace ApiToProject.Services
 {
-    public interface IProfileGeneratorRepository
+    public interface IProfileGeneratorServices
     {
         /*------------Employee--------------*/
         IEnumerable<Employee> GetEmployees();

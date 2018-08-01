@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ApiToProject.Services
 {
-    public class ProfileGeneratorRepository : IProfileGeneratorRepository
+    public class ProfileGeneratorServices : IProfileGeneratorServices
     {
         private DataBaseContext _context;
 
-        public ProfileGeneratorRepository(DataBaseContext context)
+        public ProfileGeneratorServices(DataBaseContext context)
         {
             _context = context;
         }
@@ -64,32 +64,18 @@ namespace ApiToProject.Services
 
         /*----------------------------------------------------------*/
 
-        //public EmployeeProject GetProjectForAuthor(Guid employeeId, Guid projectId)
-        //{
-        //    return _context.EmployeeProjects
-        //        .Where(b => b.EmployeeId == employeeId && b.ProjectId == projectId).FirstOrDefault();
-        //}
 
         public Project GetProject(Guid projectId)
         {
             return _context.Projects.FirstOrDefault(b => b.Id == projectId);
         }
 
-        /*----------------------------------------------------------*/
-
-        //public IEnumerable<EmployeeProject> GetProjectsForEmployee(Guid employeeId)
-        //{
-        //    return _context.EmployeeProjects
-        //        .Where(b => b.EmployeeId == employeeId).OrderBy(b => b.Project.Title).ToList();
-        //}
 
         public IEnumerable<Project> GetProjects(Guid employeeId)
         {
             return _context.Projects.Include(x => x.EmployeeProjects).ThenInclude(z => z.Employee)
                         .Where(b => b.EmployeeProjects.Any(x => x.EmployeeId == employeeId)).OrderBy(b => b.Title).ToList();
         }
-        
-        /*----------------------------------------------------------*/
 
         public void AddProjectForEmployee(Guid employeeId, EmployeeProject project)
         {
