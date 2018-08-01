@@ -28,7 +28,6 @@ namespace ApiToProject.Entities
         public int Rating { get; set; }
 
         [Required(ErrorMessage ="Podaj ilość lat pracy w zawodzie.")]
-        [MaxLength(2,ErrorMessage ="Error")]
         public int YearsOfWork { get; set; }
 
         public ICollection<EmployeeProject> EmployeeProjects { get; set; }

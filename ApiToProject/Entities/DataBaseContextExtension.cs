@@ -1,46 +1,55 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace ApiToProject.Entities
 {
-    public static class DataBaseContextExtension
+    public static class SeedData
     {
-        public static void SeedDataForContext(this DataBaseContext context)
+        public static void Initialize(IServiceProvider serviceProvider)
         {
-            context.Employees.RemoveRange(context.Employees);
-            context.SaveChanges();
-
-            var employees = new List<Employee>()
+            var context = serviceProvider.GetRequiredService<DataBaseContext>();
+            context.Database.EnsureCreated();
+            if (!context.Employees.Any())
             {
-                new Employee()
+
+                try
                 {
-                    Id =new Guid("25320c5e-f58a-4b1f-b63a-8ee07a840bdf"),
-                    FirstName ="Jan",
-                    LastName ="Kowalski",
-                    Specialization =".Net Developer",
-                    Rating =3,
-                    YearsOfWork =2 // ,
-                        //EmployeeProjects = new List<EmployeeProject>()
-                        //{
-                        //    new EmployeeProject()
-                        //    {
-                        //        Id=new Guid(),
-                        //        Title="",
-                        //        ClientSector="",
-                        //        StartDate=new DateTimeOffset(new DateTime(2017,10,23)),
-                        //        EndDate=new DateTimeOffset(new DateTime(2017,11,28))
-                        //    }
-                        //}
-                },
-                new Employee(){Id=new Guid("35320c5e-f58a-4b1f-b63a-8ee07a840bdf"),FirstName="Sebastian",LastName="Nowak",Specialization=".Net Developer", Rating=2, YearsOfWork=1},
-                new Employee(){Id=new Guid("45320c5e-f58a-4b1f-b63a-8ee07a840bdf"),FirstName="Wojtek",LastName="Sarski",Specialization=".Net Developer", Rating=4, YearsOfWork=3}
-            };
+                    var employees = new List<Employee>()
+                {
+                new Employee(){ FirstName ="Jan", LastName ="Kowalski", Specialization =".Net Developer",Rating =3,YearsOfWork =2 },
+                new Employee(){FirstName="Sebastian",LastName="Nowak",Specialization=".Net Developer", Rating=2, YearsOfWork=1},
+                new Employee(){FirstName="Wojtek",LastName="Sarski",Specialization=".Net Developer", Rating=4, YearsOfWork=3}
+                };
 
-            context.Employees.AddRange(employees);
-            context.SaveChanges();
+                    var projects = new List<Project>()
+                {
+                    new Project(){Title="Linora-Application for managing animal transport",ClientSector="Transport animal",Technologies=".Net/C#, MVC 5, MS SQL",StartDate=new DateTime(2017,11,21),EndDate=new DateTime(2017,12,14)},
+                    new Project(){Title="Be-there- Appliacation for managing events and ticket brokering",ClientSector="Services",Technologies=".Net/C#, ASP.NET Core, AngularJS 2,TypeScript,Web API",StartDate=new DateTime(2018,01,10),EndDate=new DateTime(2018,02,04)},
+                    new Project(){Title="Ecologistics",ClientSector="Spedition",Technologies=".Net/C#, MS SQL, MVC 5",StartDate=new DateTime(2018,02,10),EndDate=new DateTime(2018,03,15)}
+                };
 
+
+
+                    context.Projects.AddRange(projects);
+                    context.Employees.AddRange(employees);
+                    context.SaveChanges();
+
+                    var employeeproject = new List<EmployeeProject>() {
+                 new EmployeeProject { EmployeeId=employees[0].Id,ProjectId=projects[0].Id},
+                 new EmployeeProject { EmployeeId=employees[0].Id,ProjectId=projects[1].Id}
+                };
+
+                    context.EmployeeProjects.AddRange(employeeproject);
+                    context.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                }
+
+            }
         }
     }
 }

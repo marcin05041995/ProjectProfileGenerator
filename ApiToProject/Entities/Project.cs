@@ -13,15 +13,12 @@ namespace ApiToProject.Entities
         public Guid Id { get; set; }
 
         [Required(ErrorMessage ="Uzupełnij pole: ")]
-        [MaxLength(50,ErrorMessage ="Max 50 znaków")]
         public string Title { get; set; }
 
         [Required(ErrorMessage = "Uzupełnij pole: ")]
-        [MaxLength(50, ErrorMessage = "Max 50 znaków")]
         public string ClientSector { get; set; }
 
         [Required(ErrorMessage = "Uzupełnij pole: ")]
-        [MaxLength(50, ErrorMessage = "Max 50 znaków")]
         public string Technologies { get; set; }
 
         public DateTime StartDate { get; set; }

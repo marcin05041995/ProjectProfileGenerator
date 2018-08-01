@@ -5,15 +5,13 @@ using System.Threading.Tasks;
 
 namespace ApiToProject.Models
 {
-    public class EmployeeDto
+    public class Profile
     {
         public Guid Id { get; set; }
-        public string FirstName { get; set; }
+        public string Name { get; set; }
         public string LastName { get; set; }
         public string Specialization { get; set; }
         public int Rating { get; set; }
-        public int YearsOfWork { get; set; }
-
-        public Guid ProjectId { get; set; }
+        public string OverallTenure { get; set; }
     }
 }

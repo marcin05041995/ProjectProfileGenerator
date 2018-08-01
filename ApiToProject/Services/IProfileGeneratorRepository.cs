@@ -9,6 +9,7 @@ namespace ApiToProject.Services
 {
     public interface IProfileGeneratorRepository
     {
+        /*------------Employee--------------*/
         IEnumerable<Employee> GetEmployees();
         Employee GetEmployee(Guid employeeId);
         IEnumerable<Employee> GetEmployees(IEnumerable<Guid> employeeIds);
@@ -16,9 +17,13 @@ namespace ApiToProject.Services
         void DeleteEmployee(Employee employee);
         void UpdateAuthor(Employee employee);
 
-        IEnumerable<EmployeeProject> GetProjectsForEmployee(Guid employeeId);
-        EmployeeProject GetProjectForEmployee(Guid employeeId, Guid projectId);
+        /*------------Project--------------*/
+        //IEnumerable<EmployeeProject> GetProjectsForEmployee(Guid employeeId);
+        //EmployeeProject GetProjectForEmployee(Guid employeeId, Guid projectId);
+        Project GetProject(Guid projectId);
+        IEnumerable<Project> GetProjects(Guid employeeId);
         void AddProjectForEmployee(Guid employeeId, EmployeeProject project);
+        void UpdateProjectForEmployee(Project project);
 
         bool Save();
     }

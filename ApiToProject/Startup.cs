@@ -39,8 +39,6 @@ namespace ApiToProject
                 cfg.CreateMap<Models.EmployeeForCreationDto, Entities.Employee>();
             });
 
-            dataBaseContext.SeedDataForContext();
-
             app.UseMvc();
         }
     }

@@ -5,10 +5,11 @@ using System.Threading.Tasks;
 
 namespace ApiToProject.Models
 {
-    public class SkillsForCreationDto
+    public class ProfileSkill
     {
-        public string SkillName { get; set; }
-        public int ExperienceInYears { get; set; }
+        public Guid Id { get; set; }
+        public string Name { get; set; }
+        public double Experience { get; set; }
         public int Profficiency { get; set; }
     }
 }

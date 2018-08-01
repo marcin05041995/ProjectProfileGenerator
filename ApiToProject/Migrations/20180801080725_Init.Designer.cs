@@ -11,9 +11,10 @@ using System;
 namespace ApiToProject.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    partial class DataBaseContextModelSnapshot : ModelSnapshot
+    [Migration("20180801080725_Init")]
+    partial class Init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -130,17 +131,20 @@ namespace ApiToProject.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("ClientSector")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasMaxLength(50);
 
                     b.Property<DateTime>("EndDate");
 
                     b.Property<DateTime>("StartDate");
 
                     b.Property<string>("Technologies")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasMaxLength(50);
 
                     b.Property<string>("Title")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasMaxLength(50);
 
                     b.HasKey("Id");
 

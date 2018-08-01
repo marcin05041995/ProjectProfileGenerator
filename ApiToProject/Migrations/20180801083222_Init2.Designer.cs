@@ -11,8 +11,8 @@ using System;
 namespace ApiToProject.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    [Migration("20180731090218_Init")]
-    partial class Init
+    [Migration("20180801083222_Init2")]
+    partial class Init2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -40,8 +40,7 @@ namespace ApiToProject.Migrations
                         .IsRequired()
                         .HasMaxLength(50);
 
-                    b.Property<int>("YearsOfWork")
-                        .HasMaxLength(2);
+                    b.Property<int>("YearsOfWork");
 
                     b.HasKey("Id");
 
@@ -56,6 +55,12 @@ namespace ApiToProject.Migrations
                     b.Property<Guid>("EmployeeId");
 
                     b.Property<Guid>("LanguageId");
+
+                    b.Property<int>("ReadingLevel");
+
+                    b.Property<int>("SpeakingLevel");
+
+                    b.Property<int>("WritingLevel");
 
                     b.HasKey("Id");
 
@@ -81,7 +86,7 @@ namespace ApiToProject.Migrations
 
                     b.HasIndex("ProjectId", "EmployeeId");
 
-                    b.ToTable("EmployeeProject");
+                    b.ToTable("EmployeeProjects");
                 });
 
             modelBuilder.Entity("ApiToProject.Entities.EmployeeSkill", b =>
@@ -90,6 +95,10 @@ namespace ApiToProject.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<Guid>("EmployeeId");
+
+                    b.Property<double>("ExperienceInYears");
+
+                    b.Property<int>("Profficiency");
 
                     b.Property<Guid>("SkillId");
 
@@ -111,12 +120,6 @@ namespace ApiToProject.Migrations
                         .IsRequired()
                         .HasMaxLength(20);
 
-                    b.Property<int>("ReadingLevel");
-
-                    b.Property<int>("SpeakingLevel");
-
-                    b.Property<int>("WritingLevel");
-
                     b.HasKey("Id");
 
                     b.ToTable("Languages");
@@ -128,20 +131,17 @@ namespace ApiToProject.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("ClientSector")
-                        .IsRequired()
-                        .HasMaxLength(50);
+                        .IsRequired();
 
                     b.Property<DateTime>("EndDate");
 
                     b.Property<DateTime>("StartDate");
 
                     b.Property<string>("Technologies")
-                        .IsRequired()
-                        .HasMaxLength(50);
+                        .IsRequired();
 
                     b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(50);
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -152,10 +152,6 @@ namespace ApiToProject.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
-
-                    b.Property<double>("ExperienceInYears");
-
-                    b.Property<int>("Profficiency");
 
                     b.Property<string>("SkillName")
                         .IsRequired()

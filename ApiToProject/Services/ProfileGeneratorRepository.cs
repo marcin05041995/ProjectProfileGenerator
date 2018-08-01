@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using ApiToProject.Entities;
 using ApiToProject.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace ApiToProject.Services
 {
@@ -61,24 +62,34 @@ namespace ApiToProject.Services
             return (_context.SaveChanges() >= 0);
         }
 
-        //---------------------------------------------------------------
-        //---------------------------------------------------------------
-        //---------------------------------------------------------------
-        //---------------------------------------------------------------
-        //---------------------------------------------------------------
+        /*----------------------------------------------------------*/
 
+        //public EmployeeProject GetProjectForAuthor(Guid employeeId, Guid projectId)
+        //{
+        //    return _context.EmployeeProjects
+        //        .Where(b => b.EmployeeId == employeeId && b.ProjectId == projectId).FirstOrDefault();
+        //}
 
-        public EmployeeProject GetProjectForAuthor(Guid employeeId, Guid projectId)
+        public Project GetProject(Guid projectId)
         {
-            return _context.EmployeeProjects
-                .Where(b => b.EmployeeId == employeeId && b.ProjectId == projectId).FirstOrDefault();
+            return _context.Projects.FirstOrDefault(b => b.Id == projectId);
         }
 
-        public IEnumerable<EmployeeProject> GetProjectsForEmployee(Guid employeeId)
+        /*----------------------------------------------------------*/
+
+        //public IEnumerable<EmployeeProject> GetProjectsForEmployee(Guid employeeId)
+        //{
+        //    return _context.EmployeeProjects
+        //        .Where(b => b.EmployeeId == employeeId).OrderBy(b => b.Project.Title).ToList();
+        //}
+
+        public IEnumerable<Project> GetProjects(Guid employeeId)
         {
-            return _context.EmployeeProjects
-                .Where(b => b.EmployeeId == employeeId).OrderBy(b => b.Project.Title).ToList();
+            return _context.Projects.Include(x => x.EmployeeProjects).ThenInclude(z => z.Employee)
+                        .Where(b => b.EmployeeProjects.Any(x => x.EmployeeId == employeeId)).OrderBy(b => b.Title).ToList();
         }
+        
+        /*----------------------------------------------------------*/
 
         public void AddProjectForEmployee(Guid employeeId, EmployeeProject project)
         {
@@ -92,6 +103,8 @@ namespace ApiToProject.Services
                 employee.EmployeeProjects.Add(project);
             }
         }
+
+        public void UpdateProjectForEmployee(Project project) { }
 
     }
 }
