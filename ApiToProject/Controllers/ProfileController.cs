@@ -34,10 +34,11 @@ namespace ApiToProject.Controllers
             {
 
                 Id = employee.Id,
-                Name = employee.FirstName + " " + employee.LastName,
+                Name = employee.FirstName ,
+                LastName =employee.LastName,
                 Specialization = employee.Specialization,
                 Rating = employee.Rating,
-                OverallTenure = employee.YearsOfWork.ToString(),
+                OverallTenure = employee.YearsOfWork
 
             };
 
@@ -58,8 +59,8 @@ namespace ApiToProject.Controllers
                 {
                     Id = skill.Skill.Id,
                     Name = skill.Skill.SkillName,
-                    Experience = skill.ExperienceInYears,
-                    Profficiency = skill.Profficiency
+                    Experience = skill.Skill.ExperienceInYears,
+                    Profficiency = skill.Skill.Profficiency
                 });
             }
 
@@ -87,7 +88,6 @@ namespace ApiToProject.Controllers
                     EndDate=project.Project.EndDate
                 });
             }
-
             return output;
         }
 
@@ -106,9 +106,9 @@ namespace ApiToProject.Controllers
                 {
                     Id = language.Language.Id,
                     Name = language.Language.LanguageName,
-                    Speaking = language.SpeakingLevel,
-                    Writing = language.WritingLevel,
-                    Reading = language.ReadingLevel
+                    Speaking = language.Language.SpeakingLevel,
+                    Writing = language.Language.WritingLevel,
+                    Reading = language.Language.ReadingLevel
 
                 });
             }

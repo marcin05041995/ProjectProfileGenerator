@@ -17,11 +17,11 @@ namespace ApiToProject.Entities
         public Employee Employee { get; set; }
 
 
-        [Required(ErrorMessage = "Uzupełnij pole")]
-        public double ExperienceInYears { get; set; }
+        //[Required(ErrorMessage = "Uzupełnij pole")]
+        //public double ExperienceInYears { get; set; }
 
-        [Required(ErrorMessage = "Uzupełnij pole")]
-        [Range(1, 5, ErrorMessage = "Oceń w skali od 1 do 5")]
-        public int Profficiency { get; set; }
+        //[Required(ErrorMessage = "Uzupełnij pole")]
+        //[Range(1, 5, ErrorMessage = "Oceń w skali od 1 do 5")]
+        //public int Profficiency { get; set; }
     }
 }

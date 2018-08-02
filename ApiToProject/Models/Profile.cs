@@ -12,6 +12,6 @@ namespace ApiToProject.Models
         public string LastName { get; set; }
         public string Specialization { get; set; }
         public int Rating { get; set; }
-        public string OverallTenure { get; set; }
+        public int OverallTenure { get; set; }
     }
 }

@@ -13,10 +13,10 @@ namespace ApiToProject.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    FirstName = table.Column<string>(maxLength: 20, nullable: false),
-                    LastName = table.Column<string>(maxLength: 30, nullable: false),
+                    FirstName = table.Column<string>(nullable: false),
+                    LastName = table.Column<string>(nullable: false),
                     Rating = table.Column<int>(nullable: false),
-                    Specialization = table.Column<string>(maxLength: 50, nullable: false),
+                    Specialization = table.Column<string>(nullable: false),
                     YearsOfWork = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -29,7 +29,10 @@ namespace ApiToProject.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    LanguageName = table.Column<string>(maxLength: 20, nullable: false)
+                    LanguageName = table.Column<string>(nullable: false),
+                    ReadingLevel = table.Column<int>(nullable: false),
+                    SpeakingLevel = table.Column<int>(nullable: false),
+                    WritingLevel = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -41,11 +44,11 @@ namespace ApiToProject.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    ClientSector = table.Column<string>(maxLength: 50, nullable: false),
+                    ClientSector = table.Column<string>(nullable: false),
                     EndDate = table.Column<DateTime>(nullable: false),
                     StartDate = table.Column<DateTime>(nullable: false),
-                    Technologies = table.Column<string>(maxLength: 50, nullable: false),
-                    Title = table.Column<string>(maxLength: 50, nullable: false)
+                    Technologies = table.Column<string>(nullable: false),
+                    Title = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -57,7 +60,9 @@ namespace ApiToProject.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    SkillName = table.Column<string>(maxLength: 20, nullable: false)
+                    ExperienceInYears = table.Column<double>(nullable: false),
+                    Profficiency = table.Column<int>(nullable: false),
+                    SkillName = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -65,27 +70,24 @@ namespace ApiToProject.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "EmployeeLanguage",
+                name: "EmployeeLanguages",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
                     EmployeeId = table.Column<Guid>(nullable: false),
-                    LanguageId = table.Column<Guid>(nullable: false),
-                    ReadingLevel = table.Column<int>(nullable: false),
-                    SpeakingLevel = table.Column<int>(nullable: false),
-                    WritingLevel = table.Column<int>(nullable: false)
+                    LanguageId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EmployeeLanguage", x => x.Id);
+                    table.PrimaryKey("PK_EmployeeLanguages", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_EmployeeLanguage_Languages_EmployeeId",
+                        name: "FK_EmployeeLanguages_Languages_EmployeeId",
                         column: x => x.EmployeeId,
                         principalTable: "Languages",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_EmployeeLanguage_Employees_LanguageId",
+                        name: "FK_EmployeeLanguages_Employees_LanguageId",
                         column: x => x.LanguageId,
                         principalTable: "Employees",
                         principalColumn: "Id",
@@ -118,26 +120,24 @@ namespace ApiToProject.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "EmployeeSkill",
+                name: "EmployeeSkills",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
                     EmployeeId = table.Column<Guid>(nullable: false),
-                    ExperienceInYears = table.Column<double>(nullable: false),
-                    Profficiency = table.Column<int>(nullable: false),
                     SkillId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EmployeeSkill", x => x.Id);
+                    table.PrimaryKey("PK_EmployeeSkills", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_EmployeeSkill_Skills_EmployeeId",
+                        name: "FK_EmployeeSkills_Skills_EmployeeId",
                         column: x => x.EmployeeId,
                         principalTable: "Skills",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_EmployeeSkill_Employees_SkillId",
+                        name: "FK_EmployeeSkills_Employees_SkillId",
                         column: x => x.SkillId,
                         principalTable: "Employees",
                         principalColumn: "Id",
@@ -145,13 +145,13 @@ namespace ApiToProject.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_EmployeeLanguage_LanguageId",
-                table: "EmployeeLanguage",
+                name: "IX_EmployeeLanguages_LanguageId",
+                table: "EmployeeLanguages",
                 column: "LanguageId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EmployeeLanguage_EmployeeId_LanguageId",
-                table: "EmployeeLanguage",
+                name: "IX_EmployeeLanguages_EmployeeId_LanguageId",
+                table: "EmployeeLanguages",
                 columns: new[] { "EmployeeId", "LanguageId" });
 
             migrationBuilder.CreateIndex(
@@ -165,26 +165,26 @@ namespace ApiToProject.Migrations
                 columns: new[] { "ProjectId", "EmployeeId" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_EmployeeSkill_SkillId",
-                table: "EmployeeSkill",
+                name: "IX_EmployeeSkills_SkillId",
+                table: "EmployeeSkills",
                 column: "SkillId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EmployeeSkill_EmployeeId_SkillId",
-                table: "EmployeeSkill",
+                name: "IX_EmployeeSkills_EmployeeId_SkillId",
+                table: "EmployeeSkills",
                 columns: new[] { "EmployeeId", "SkillId" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "EmployeeLanguage");
+                name: "EmployeeLanguages");
 
             migrationBuilder.DropTable(
                 name: "EmployeeProjects");
 
             migrationBuilder.DropTable(
-                name: "EmployeeSkill");
+                name: "EmployeeSkills");
 
             migrationBuilder.DropTable(
                 name: "Languages");

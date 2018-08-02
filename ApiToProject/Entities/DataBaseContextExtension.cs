@@ -52,30 +52,28 @@ namespace ApiToProject.Entities
                 };
 
 
+                context.Employees.AddRange(employees);
+                context.Projects.AddRange(projects);
                 context.Languages.AddRange(languages);
                 context.Skills.AddRange(skills);
-                context.Projects.AddRange(projects);
-                context.Employees.AddRange(employees);
                 context.SaveChanges();
 
                  var employeeproject = new List<EmployeeProject>() {
                  new EmployeeProject { EmployeeId=employees[0].Id,ProjectId=projects[0].Id},
-                 new EmployeeProject { EmployeeId=employees[1].Id,ProjectId=projects[1].Id}     //01
+                 new EmployeeProject { EmployeeId=employees[0].Id,ProjectId=projects[1].Id}     
                 };
 
                 var employeeskill = new List<EmployeeSkill>()
                 {
-                 new EmployeeSkill { EmployeeId=employees[0].Id,SkillId=projects[0].Id},
-                 new EmployeeSkill { EmployeeId=employees[1].Id,SkillId=projects[1].Id}
+                 new EmployeeSkill { EmployeeId=employees[0].Id,SkillId=skills[0].Id},
+                 new EmployeeSkill { EmployeeId=employees[0].Id,SkillId=skills[1].Id}
                 };
 
                 var employeelanguage = new List<EmployeeLanguage>()
                 {
-                 new EmployeeLanguage { EmployeeId=employees[0].Id,LanguageId=projects[0].Id},
-                 new EmployeeLanguage { EmployeeId=employees[1].Id,LanguageId=projects[1].Id}
+                 new EmployeeLanguage { EmployeeId=employees[0].Id,LanguageId=languages[0].Id},
+                 new EmployeeLanguage { EmployeeId=employees[0].Id,LanguageId=languages[1].Id}
                 };
-
-
                     context.EmployeeProjects.AddRange(employeeproject);
                     context.EmployeeSkills.AddRange(employeeskill);
                     context.EmployeeLanguages.AddRange(employeelanguage);

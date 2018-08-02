@@ -26,18 +26,15 @@ namespace ApiToProject.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasMaxLength(20);
+                        .IsRequired();
 
                     b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasMaxLength(30);
+                        .IsRequired();
 
                     b.Property<int>("Rating");
 
                     b.Property<string>("Specialization")
-                        .IsRequired()
-                        .HasMaxLength(50);
+                        .IsRequired();
 
                     b.Property<int>("YearsOfWork");
 
@@ -55,19 +52,13 @@ namespace ApiToProject.Migrations
 
                     b.Property<Guid>("LanguageId");
 
-                    b.Property<int>("ReadingLevel");
-
-                    b.Property<int>("SpeakingLevel");
-
-                    b.Property<int>("WritingLevel");
-
                     b.HasKey("Id");
 
                     b.HasIndex("LanguageId");
 
                     b.HasIndex("EmployeeId", "LanguageId");
 
-                    b.ToTable("EmployeeLanguage");
+                    b.ToTable("EmployeeLanguages");
                 });
 
             modelBuilder.Entity("ApiToProject.Entities.EmployeeProject", b =>
@@ -95,10 +86,6 @@ namespace ApiToProject.Migrations
 
                     b.Property<Guid>("EmployeeId");
 
-                    b.Property<double>("ExperienceInYears");
-
-                    b.Property<int>("Profficiency");
-
                     b.Property<Guid>("SkillId");
 
                     b.HasKey("Id");
@@ -107,7 +94,7 @@ namespace ApiToProject.Migrations
 
                     b.HasIndex("EmployeeId", "SkillId");
 
-                    b.ToTable("EmployeeSkill");
+                    b.ToTable("EmployeeSkills");
                 });
 
             modelBuilder.Entity("ApiToProject.Entities.Language", b =>
@@ -116,8 +103,13 @@ namespace ApiToProject.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("LanguageName")
-                        .IsRequired()
-                        .HasMaxLength(20);
+                        .IsRequired();
+
+                    b.Property<int>("ReadingLevel");
+
+                    b.Property<int>("SpeakingLevel");
+
+                    b.Property<int>("WritingLevel");
 
                     b.HasKey("Id");
 
@@ -152,9 +144,12 @@ namespace ApiToProject.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<double>("ExperienceInYears");
+
+                    b.Property<int>("Profficiency");
+
                     b.Property<string>("SkillName")
-                        .IsRequired()
-                        .HasMaxLength(20);
+                        .IsRequired();
 
                     b.HasKey("Id");
 

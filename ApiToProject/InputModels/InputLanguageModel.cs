@@ -7,6 +7,7 @@ namespace ApiToProject.InputModels
 {
     public class InputLanguageModel
     {
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public int Speaking { get; set; }
         public int Writing { get; set; }
