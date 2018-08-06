@@ -7,8 +7,10 @@
 
     <div class="col-lg-3"></div>
     <div class="col-lg-6">
-      <router-link to="/addemployee"><button class="btn btn-primary" style="float:left; margin-bottom:20px;">Dodaj pracownika</button></router-link>
-        <table class="table table-hover">
+      <router-link to="/addemployee"><button class="btn btn-primary"
+        style="float:left; margin-bottom:20px;">Dodaj pracownika</button></router-link>
+
+        <table class="table table-hover" method="get">
             <thead>
                 <tr>
                     <th>ID</th>

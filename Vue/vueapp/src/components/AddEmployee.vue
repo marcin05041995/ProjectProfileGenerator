@@ -19,7 +19,8 @@
 
                 <div class="form-group">
                   <label for="Specialization">Specjalizacja</label>
-                  <input type="Specialization" class="form-control" id="Specialization" placeholder="Specjalizacja">
+                  <input type="Specialization" class="form-control"
+                  id="Specialization" placeholder="Specjalizacja">
                 </div>
 
                 <div class="form-group">
@@ -29,11 +30,14 @@
 
                 <div class="form-group">
                   <label for="YearsOfWork">Kadencja</label>
-                  <input type="YearsOfWork" class="form-control" id="YearsOfWork" placeholder="Ilość przepracowanych lat">
+                  <input type="YearsOfWork" class="form-control"
+                  id="YearsOfWork" placeholder="Ilość przepracowanych lat">
                 </div>
 
                 <button type="submit" class="btn btn-primary">Dodaj</button>
-                <router-link to="/employee"><button type="submit" class="btn btn-info">Wróć</button></router-link>
+                <router-link to="/employee"><button type="submit" class="btn btn-info">
+                  Wróć</button>
+                </router-link>
           </form>
         </div>
       <div class="col-lg-4"></div>

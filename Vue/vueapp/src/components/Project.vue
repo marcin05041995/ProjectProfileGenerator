@@ -7,7 +7,9 @@
     <br/><br/><br/>
     <div class="col-lg-3"></div>
     <div class="col-lg-6">
-      <router-link to="/addproject"><button class="btn btn-primary" style="float:left; margin-bottom:20px;">Dodaj projekt</button></router-link>
+      <router-link to="/addproject"><button class="btn btn-primary"
+        style="float:left; margin-bottom:20px;">Dodaj projekt</button></router-link>
+
           <table class="table table-hover">
             <thead>
                 <tr>
@@ -24,7 +26,7 @@
                 </tr>
                 <tr>
                     <td align="left">2</td>
-                    <td align="left">Projek2</td>
+                    <td align="left">Projekt2</td>
                     <td align="left">Zbyszek</td>
                 </tr>
                 <tr>
@@ -34,6 +36,7 @@
                 </tr>
             </tbody>
         </table>
+
     </div>
     <div class="col-lg-3"></div>
   </div>

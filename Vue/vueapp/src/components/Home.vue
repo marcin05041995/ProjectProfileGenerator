@@ -3,8 +3,10 @@
     <bt/>
     <h1>{{ msg }}</h1>
     <h2>Co chcesz zrobić?</h2>
-    <router-link to="/employee"><button class="btn btn-primary" style="width:250px;">Przejdź do bazy pracowników</button></router-link><br/><br/>
-    <router-link to="/project"><button class="btn btn-info " style="width:250px;">Przejdź do bazy projektów</button></router-link>
+       <router-link to="/employee"><button class="btn btn-primary" style="width:250px;">
+         Przejdź do bazy pracowników</button></router-link><br/><br/>
+       <router-link to="/project"><button class="btn btn-info " style="width:250px;">
+         Przejdź do bazy projektów</button></router-link>
   </div>
 </template>
 

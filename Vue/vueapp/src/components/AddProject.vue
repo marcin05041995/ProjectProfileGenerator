@@ -13,26 +13,31 @@
 
             <div class="form-group">
               <label for="ClientSector">Sektor klienta</label>
-              <input type="ClientSector" class="form-control" id="ClientSector" placeholder="Sektor klienta">
+              <input type="ClientSector" class="form-control"
+                id="ClientSector" placeholder="Sektor klienta">
             </div>
 
             <div class="form-group">
               <label for="Technologies">Technologie</label>
-              <input type="Technologies" class="form-control" id="Technologies" placeholder="Technologie">
+              <input type="Technologies" class="form-control"
+               id="Technologies" placeholder="Technologie">
             </div>
 
             <div class="form-group">
               <label for="StartDate">Data rozpoczęcia projektu</label>
-              <input type="StartDate" class="form-control" id="StartDate" placeholder="Data rozpoczęcia projektu">
+              <input type="StartDate" class="form-control"
+               id="StartDate" placeholder="Data rozpoczęcia projektu">
             </div>
 
             <div class="form-group">
               <label for="EndDate">Data zakończenia projektu</label>
-              <input type="EndDate" class="form-control" id="EndDate" placeholder="Data zakończenia projektu">
+              <input type="EndDate" class="form-control"
+               id="EndDate" placeholder="Data zakończenia projektu">
             </div>
 
             <button type="submit" class="btn btn-primary">Dodaj</button>
-            <router-link to="/project"><button type="submit" class="btn btn-info">Wróć</button></router-link>
+            <router-link to="/project"><button type="submit" class="btn btn-info">
+              Wróć</button></router-link>
           </form>
         </div>
       <div class="col-lg-4"></div>
