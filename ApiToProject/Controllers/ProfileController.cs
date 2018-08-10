@@ -3,6 +3,7 @@ using ApiToProject.InputModels;
 using ApiToProject.Models;
 using ApiToProject.Services;
 using AutoMapper;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -44,6 +45,9 @@ namespace ApiToProject.Controllers
 
             return output;
         }
+
+
+
 
         private IList<ProfileSkill> GenerateSkills(Guid Id)
         {
@@ -131,6 +135,30 @@ namespace ApiToProject.Controllers
             return StatusCode(200, output);
         }
 
+        [Route("GetEmployees")]
+        [HttpGet]
+        public IActionResult GetEmployees()
+        {
+            var tmp = context.Employees
+                 .ToList();
+
+            var output = new List<EmployeeViewModel>();
+
+            foreach(var emp in tmp)
+            {
+                output.Add(new EmployeeViewModel
+                {
+                    Profile = GenerateProfile(emp.Id),
+                    Skills = GenerateSkills(emp.Id),
+                    Languages = GenerateLanguage(emp.Id),
+                    Projects = GenerateProject(emp.Id)
+                });
+            }
+
+            return StatusCode(200, output);
+        }
+
+
         [HttpPost]
         public IActionResult AddEmployee(InputEmployeeModel employeeInputModel)
         {
@@ -147,6 +175,7 @@ namespace ApiToProject.Controllers
             return StatusCode((int)HttpStatusCode.OK);
         }
 
+        [Route("GetEdit")]
         [HttpGet]
         public IActionResult EditEmployee(Guid id)
         {
@@ -181,6 +210,8 @@ namespace ApiToProject.Controllers
             return StatusCode((int)HttpStatusCode.OK);
         }
 
+        [Route("Delete")]
+        [HttpDelete]
         public IActionResult DeleteEmployee(Guid Id)
         {
             Employee employee = context.Employees.Find(Id);
@@ -189,49 +220,6 @@ namespace ApiToProject.Controllers
             context.SaveChanges();
             return StatusCode((int)HttpStatusCode.OK);
         }
-
-
-
-
-
-        //private IProfileGeneratorServices services;
-
-        //public ProfileController(IProfileGeneratorServices services)
-        //{
-        //    this.services = services;
-        //}
-
-        //[Route("CreateEmployee")]
-        //[HttpPost]
-        //public IActionResult CreateEmployee([FromBody]InputEmployeeModel e)
-        //{
-        //    if(e==null)
-        //    { return BadRequest(); }
-
-        //    var employeeEntity = Mapper.Map<Employee>(e);
-        //    services.AddEmployee(employeeEntity);
-
-        //    var employeeToReturn = Mapper.Map<InputEmployeeModel>(employeeEntity);
-
-        //    return CreatedAtRoute("AddEmployee", new { id = employeeToReturn.Id }, employeeToReturn);
-
-        //}
-
-        ////[HttpDelete("{id}")]
-        //public IActionResult DeleteEmployee(Guid id)
-        //{
-        //    var e = services.GetEmployee(id);
-        //    if (e == null){ return NotFound(); }
-
-        //    services.DeleteEmployee(e);
-        //    return NoContent();
-        //}
-
-        //[HttpGet]
-        //public IActionResult EditEmployee() { }
-
-        //[HttpPost]
-        //public IActionResult EditEmployee() { }
 
     }
 

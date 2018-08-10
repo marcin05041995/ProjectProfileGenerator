@@ -11,8 +11,8 @@ using System;
 namespace ApiToProject.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    [Migration("20180802123546_Init")]
-    partial class Init
+    [Migration("20180807082355_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -159,12 +159,12 @@ namespace ApiToProject.Migrations
 
             modelBuilder.Entity("ApiToProject.Entities.EmployeeLanguage", b =>
                 {
-                    b.HasOne("ApiToProject.Entities.Language", "Language")
+                    b.HasOne("ApiToProject.Entities.Employee", "Employee")
                         .WithMany("EmployeeLanguages")
                         .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("ApiToProject.Entities.Employee", "Employee")
+                    b.HasOne("ApiToProject.Entities.Language", "Language")
                         .WithMany("EmployeeLanguages")
                         .HasForeignKey("LanguageId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -185,12 +185,12 @@ namespace ApiToProject.Migrations
 
             modelBuilder.Entity("ApiToProject.Entities.EmployeeSkill", b =>
                 {
-                    b.HasOne("ApiToProject.Entities.Skill", "Skill")
+                    b.HasOne("ApiToProject.Entities.Employee", "Employee")
                         .WithMany("EmployeeSkills")
                         .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("ApiToProject.Entities.Employee", "Employee")
+                    b.HasOne("ApiToProject.Entities.Skill", "Skill")
                         .WithMany("EmployeeSkills")
                         .HasForeignKey("SkillId")
                         .OnDelete(DeleteBehavior.Cascade);

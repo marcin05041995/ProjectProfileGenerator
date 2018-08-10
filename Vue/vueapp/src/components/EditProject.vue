@@ -1,7 +1,7 @@
 <template>
   <div class="addproject">
     <bt/>
-    <h1>Witaj w oknie dodawania projektu.</h1>
+    <h1>Witaj w oknie edycji projektu.</h1>
     <h2>Proszę o wypełnienie formularza.</h2>
       <div class="col-lg-4"></div>
         <div class="col-lg-4">
@@ -35,7 +35,7 @@
                id="EndDate" placeholder="Data zakończenia projektu">
             </div>
 
-            <button type="submit" class="btn btn-primary">Dodaj projekt</button>
+            <button type="submit" class="btn btn-primary">Zapisz zmiany</button>
             <router-link to="/project"><button type="submit" class="btn btn-info">
               Wróć</button></router-link>
           </form>

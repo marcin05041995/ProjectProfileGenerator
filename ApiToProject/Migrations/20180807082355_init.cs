@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace ApiToProject.Migrations
 {
-    public partial class Init : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -81,15 +81,15 @@ namespace ApiToProject.Migrations
                 {
                     table.PrimaryKey("PK_EmployeeLanguages", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_EmployeeLanguages_Languages_EmployeeId",
+                        name: "FK_EmployeeLanguages_Employees_EmployeeId",
                         column: x => x.EmployeeId,
-                        principalTable: "Languages",
+                        principalTable: "Employees",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_EmployeeLanguages_Employees_LanguageId",
+                        name: "FK_EmployeeLanguages_Languages_LanguageId",
                         column: x => x.LanguageId,
-                        principalTable: "Employees",
+                        principalTable: "Languages",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -131,15 +131,15 @@ namespace ApiToProject.Migrations
                 {
                     table.PrimaryKey("PK_EmployeeSkills", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_EmployeeSkills_Skills_EmployeeId",
+                        name: "FK_EmployeeSkills_Employees_EmployeeId",
                         column: x => x.EmployeeId,
-                        principalTable: "Skills",
+                        principalTable: "Employees",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_EmployeeSkills_Employees_SkillId",
+                        name: "FK_EmployeeSkills_Skills_SkillId",
                         column: x => x.SkillId,
-                        principalTable: "Employees",
+                        principalTable: "Skills",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -193,10 +193,10 @@ namespace ApiToProject.Migrations
                 name: "Projects");
 
             migrationBuilder.DropTable(
-                name: "Skills");
+                name: "Employees");
 
             migrationBuilder.DropTable(
-                name: "Employees");
+                name: "Skills");
         }
     }
 }

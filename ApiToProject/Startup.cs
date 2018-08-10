@@ -6,7 +6,7 @@ using ApiToProject.Entities;
 using ApiToProject.Services;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
-
+using System;
 
 namespace ApiToProject
 {
@@ -23,6 +23,18 @@ namespace ApiToProject
 
             //register repo
             services.AddScoped<IProfileGeneratorServices, ProfileGeneratorServices> ();
+            //services.AddCors();
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowCredentials()
+                        .SetPreflightMaxAge(TimeSpan.FromSeconds(2520))
+                        .Build());
+            });
 
         }
 
@@ -39,7 +51,15 @@ namespace ApiToProject
                 cfg.CreateMap<InputModels.InputEmployeeModel, Entities.Employee>();
             });
 
+            //app.UseCors(builder =>
+            //    builder.WithOrigins("http://localhost:8080/#/employee"));
+
+            app.UseCors("CorsPolicy");
             app.UseMvc();
+
+            
+
+
         }
     }
 }

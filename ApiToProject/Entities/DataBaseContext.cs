@@ -56,13 +56,13 @@ namespace ApiToProject.Entities
             modelBuilder.Entity<EmployeeLanguage>()
                 .HasOne(a => a.Employee)
                 .WithMany(a => a.EmployeeLanguages)
-                .HasForeignKey(a => a.LanguageId)
+                .HasForeignKey(a => a.EmployeeId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<EmployeeLanguage>()
                 .HasOne(pe => pe.Language)
                 .WithMany(p => p.EmployeeLanguages)
-                .HasForeignKey(pc => pc.EmployeeId)
+                .HasForeignKey(pc => pc.LanguageId)
                 .OnDelete(DeleteBehavior.Cascade);
 
 
@@ -74,13 +74,13 @@ namespace ApiToProject.Entities
             modelBuilder.Entity<EmployeeSkill>()
                 .HasOne(x => x.Employee)
                 .WithMany(p => p.EmployeeSkills)
-                .HasForeignKey(pc => pc.SkillId)
+                .HasForeignKey(pc => pc.EmployeeId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<EmployeeSkill>()
                 .HasOne(x => x.Skill)
                 .WithMany(p => p.EmployeeSkills)
-                .HasForeignKey(pc => pc.EmployeeId)
+                .HasForeignKey(pc => pc.SkillId)
                 .OnDelete(DeleteBehavior.Cascade);
 
 

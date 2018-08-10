@@ -77,6 +77,25 @@ namespace ApiToProject.Controllers
             return StatusCode(200, output);
         }
 
+        [Route("GetProjects")]
+        [HttpGet]
+        public IActionResult GetProjects()
+        {
+            var tmp=context.Projects.ToList();
+
+            var output = new List<ProjectViewModel>();
+                 foreach(var proj in tmp)
+            {
+                output.Add(new ProjectViewModel
+                {
+                    ProfileProject = GenerateProject(proj.Id),
+                    Profiles = GenerateProfile(proj.Id)
+                });
+            }
+
+            return StatusCode(200, output);
+        }
+
         [HttpPost]
         public IActionResult AddProject(InputProjectModel inputProjectModel)
         {

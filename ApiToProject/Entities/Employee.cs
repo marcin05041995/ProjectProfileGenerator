@@ -30,6 +30,7 @@ namespace ApiToProject.Entities
         public ICollection<EmployeeProject> EmployeeProjects { get; set; }
         public ICollection<EmployeeLanguage> EmployeeLanguages { get; set; }
         public ICollection<EmployeeSkill> EmployeeSkills { get; set; }
+
         //public ICollection<Skill> Skills { get; set; }
         //= new List<Skill>();
 

@@ -5,7 +5,9 @@ import Project from '@/components/Project';
 import Employee from '@/components/Employee';
 import AddEmployee from '@/components/AddEmployee';
 import AddProject from '@/components/AddProject';
-
+import EditEmployee from '@/components/EditEmployee';
+import EditProject from '@/components/EditProject';
+import ProjectInfoView from '@/components/ProjectInfoView'
 
 Vue.use(Router);
 
@@ -36,5 +38,20 @@ export default new Router({
       name: 'AddProject',
       component: AddProject,
     },
+    {
+      path: '/editemployee',
+      name: 'EditEmployee',
+      component: EditEmployee,
+    },
+    {
+      path: '/editproject',
+      name: 'EditProject',
+      component: EditProject,
+    },
+    {
+      path: '/projectinfoview',
+      name: 'ProjectInfoView',
+      component: ProjectInfoView,
+    }
   ],
 });
